@@ -1,0 +1,1058 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ApplianceEventsAlerts &mdash; SmartThings Edge Device Drivers  documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="SmartThings Edge Device Drivers  documentation" href="../../../index.html"/>
+        <link rel="up" title="Generated Clusters" href="../clusters.html"/>
+        <link rel="next" title="ElectricalMeasurement" href="ElectricalMeasurement.html"/>
+        <link rel="prev" title="SimpleMetering" href="SimpleMetering.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> SmartThings Edge Device Drivers
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Guides:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/first-driver.html">Writing your first Lua driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/package.html">Package Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/lan.html">LAN Edge Device Driver Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/rpc-client.html">Writing an RPC Client Driver</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../lua_environment.html">Lua Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../log.html">Logging Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils.html">Utils Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../buf.html">Buffer Library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../zigbee.html">Zigbee Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../driver.html">Zigbee driver structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../device.html">ZigbeeDevice Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee_message_handlers.html">Zigbee Driver RX message handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../defaults.html">Zigbee Driver Capability Defaults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../messages.html">Zigbee Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data_types.html">Zigbee Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zcl/zcl_commands.html">ZCL Global Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zcl/zcl_clusters.html">ZCL Clusters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zdo/zdo_commands.html">ZDO Commands</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../generated.html">Generated Zigbee Code</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../clusters.html">Generated Clusters</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Basic.html">Basic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PowerConfiguration.html">PowerConfiguration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DeviceTemperatureConfiguration.html">DeviceTemperatureConfiguration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Identify.html">Identify</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Groups.html">Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Scenes.html">Scenes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="OnOff.html">OnOff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Level.html">Level</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Alarms.html">Alarms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Time.html">Time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BasicInput.html">BasicInput</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Commissioning.html">Commissioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="OTAUpgrade.html">OTAUpgrade</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PollControl.html">PollControl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ShadeConfiguration.html">ShadeConfiguration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DoorLock.html">DoorLock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="WindowCovering.html">WindowCovering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BarrierControl.html">BarrierControl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PumpConfigurationAndControl.html">PumpConfigurationAndControl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Thermostat.html">Thermostat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FanControl.html">FanControl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DehumidificationControl.html">DehumidificationControl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ThermostatUserInterfaceConfiguration.html">ThermostatUserInterfaceConfiguration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ColorControl.html">ColorControl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BallastConfiguration.html">BallastConfiguration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IlluminanceMeasurement.html">IlluminanceMeasurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IlluminanceLevelSensing.html">IlluminanceLevelSensing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TemperatureMeasurement.html">TemperatureMeasurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PressureMeasurement.html">PressureMeasurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FlowMeasurement.html">FlowMeasurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RelativeHumidity.html">RelativeHumidity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="OccupancySensing.html">OccupancySensing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PhMeasurement.html">PhMeasurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ElectricalConductivityMeasurement.html">ElectricalConductivityMeasurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="WindSpeedMeasurement.html">WindSpeedMeasurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CarbonMonoxide.html">CarbonMonoxide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IASZone.html">IASZone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IASACE.html">IASACE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IASWD.html">IASWD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SimpleMetering.html">SimpleMetering</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ApplianceEventsAlerts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ElectricalMeasurement.html">ElectricalMeasurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Diagnostics.html">Diagnostics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TouchlinkCommissioning.html">TouchlinkCommissioning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../types.html">Generated Shared Types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../zwave/zwave.html">Z-Wave Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../capabilities.html">Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../device.html">Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dispatchers.html">Dispatchers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../driver_tests.html">Driver Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../datastore.html">Datastore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../socket.html">Socket Library</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">SmartThings Edge Device Drivers</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../reference/index.html">&lt;no title&gt;</a> &raquo;</li>
+        
+          <li><a href="../../zigbee.html">Zigbee Libraries</a> &raquo;</li>
+        
+          <li><a href="../../generated.html">Generated Zigbee Code</a> &raquo;</li>
+        
+          <li><a href="../clusters.html">Generated Clusters</a> &raquo;</li>
+        
+      <li>ApplianceEventsAlerts</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/zigbee/generated/clusters/ApplianceEventsAlerts.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="applianceeventsalerts">
+<h1>ApplianceEventsAlerts<a class="headerlink" href="#applianceeventsalerts" title="Permalink to this headline">¶</a></h1>
+<dl class="lua class">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts">
+<em class="property">class </em><code class="sig-name descname">st.zigbee.zcl.clusters.ApplianceEventsAlerts</code><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.ID">
+<code class="sig-name descname">ID</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.ID" title="Permalink to this definition">¶</a></dt>
+<dd><p>0x0B02 the ID of this cluster</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.NAME">
+<code class="sig-name descname">NAME</code><em class="property">: </em>str<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>“ApplianceEventsAlerts” the name of this cluster</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.attributes">
+<code class="sig-name descname">attributes</code><em class="property">: </em>st.zigbee.zcl.clusters.ApplianceEventsAlertsServerAttributes or st.zigbee.zcl.clusters.ApplianceEventsAlertsClientAttributes<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.attributes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.commands">
+<code class="sig-name descname">commands</code><em class="property">: </em>st.zigbee.zcl.clusters.ApplianceEventsAlertsServerCommands or st.zigbee.zcl.clusters.ApplianceEventsAlertsClientCommands<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.commands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types">
+<code class="sig-name descname">types</code><em class="property">: </em>st.zigbee.zcl.clusters.ApplianceEventsAlertsTypes<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.get_attribute_by_id">
+<em class="property"> </em><code class="sig-name descname">get_attribute_by_id</code><span class="sig-paren">(</span><em class="sig-param">command_id</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.get_attribute_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find an attribute by id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>command_id</strong> (<em>number</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.get_server_command_by_id">
+<em class="property"> </em><code class="sig-name descname">get_server_command_by_id</code><span class="sig-paren">(</span><em class="sig-param">command_id</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.get_server_command_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a server command by id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>command_id</strong> (<em>number</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.get_client_command_by_id">
+<em class="property"> </em><code class="sig-name descname">get_client_command_by_id</code><span class="sig-paren">(</span><em class="sig-param">command_id</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.get_client_command_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a client command by id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>command_id</strong> (<em>number</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="applianceeventsalerts-attributes">
+<h2>ApplianceEventsAlerts Attributes<a class="headerlink" href="#applianceeventsalerts-attributes" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="applianceeventsalerts-commands">
+<h2>ApplianceEventsAlerts Commands<a class="headerlink" href="#applianceeventsalerts-commands" title="Permalink to this headline">¶</a></h2>
+<dl class="lua class">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse">
+<em class="property">class </em><code class="sig-name descname">st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse</code><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.ID">
+<code class="sig-name descname">ID</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.ID" title="Permalink to this definition">¶</a></dt>
+<dd><p>0x00 the ID of this command</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.NAME">
+<code class="sig-name descname">NAME</code><em class="property">: </em>str<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>“GetAlertsResponse” the name of this command</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.alerts_count">
+<code class="sig-name descname">alerts_count</code><em class="property">: </em>st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.alerts_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.alert_structure_list">
+<code class="sig-name descname">alert_structure_list</code><em class="property">: </em>list[st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure]<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.alert_structure_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.get_fields">
+<em class="property"> </em><code class="sig-name descname">get_fields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.get_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua staticmethod">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.deserialize">
+<em class="property">static </em><code class="sig-name descname">deserialize</code><span class="sig-paren">(</span><em class="sig-param">buf</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.deserialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deserialize this command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>buf</strong> (<em>buf</em>) – the bytes of the command body</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>GetAlertsResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.set_field_names">
+<em class="property"> </em><code class="sig-name descname">set_field_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.set_field_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua staticmethod">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.build_test_rx">
+<em class="property">static </em><code class="sig-name descname">build_test_rx</code><span class="sig-paren">(</span><em class="sig-param">device</em>, <em class="sig-param">alerts_count</em>, <em class="sig-param">alert_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.build_test_rx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a version of this message as if it came from the device</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>device</strong> (<a class="reference internal" href="../../device.html#st.zigbee.Device" title="st.zigbee.Device"><em>st.zigbee.Device</em></a>) – the device to build the message from</p></li>
+<li><p><strong>alerts_count</strong> (<a class="reference internal" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount" title="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount"><em>st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount</em></a>) – </p></li>
+<li><p><strong>alert_structure</strong> (<em>list[st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The full Zigbee message containing this command body</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../messages.html#st.zigbee.ZigbeeMessageRx" title="st.zigbee.ZigbeeMessageRx">st.zigbee.ZigbeeMessageRx</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.init">
+<em class="property"> </em><code class="sig-name descname">init</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">device</em>, <em class="sig-param">alerts_count</em>, <em class="sig-param">alert_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the GetAlertsResponse command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> (<em>GetAlertsResponse</em>) – the template class for this command</p></li>
+<li><p><strong>device</strong> (<a class="reference internal" href="../../device.html#st.zigbee.Device" title="st.zigbee.Device"><em>st.zigbee.Device</em></a>) – the device to build this message to</p></li>
+<li><p><strong>alerts_count</strong> (<a class="reference internal" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount" title="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount"><em>st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount</em></a>) – </p></li>
+<li><p><strong>alert_structure</strong> (<em>list[st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the full command addressed to the device</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../messages.html#st.zigbee.ZigbeeMessageTx" title="st.zigbee.ZigbeeMessageTx">st.zigbee.ZigbeeMessageTx</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.set_parent_cluster">
+<em class="property"> </em><code class="sig-name descname">set_parent_cluster</code><span class="sig-paren">(</span><em class="sig-param">cluster</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.GetAlertsResponse.set_parent_cluster" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cluster</strong> (<em>any</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="lua class">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification">
+<em class="property">class </em><code class="sig-name descname">st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification</code><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.ID">
+<code class="sig-name descname">ID</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.ID" title="Permalink to this definition">¶</a></dt>
+<dd><p>0x01 the ID of this command</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.NAME">
+<code class="sig-name descname">NAME</code><em class="property">: </em>str<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>“AlertsNotification” the name of this command</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.alerts_count">
+<code class="sig-name descname">alerts_count</code><em class="property">: </em>st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.alerts_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.alert_structure_list">
+<code class="sig-name descname">alert_structure_list</code><em class="property">: </em>list[st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure]<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.alert_structure_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.get_fields">
+<em class="property"> </em><code class="sig-name descname">get_fields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.get_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua staticmethod">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.deserialize">
+<em class="property">static </em><code class="sig-name descname">deserialize</code><span class="sig-paren">(</span><em class="sig-param">buf</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.deserialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deserialize this command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>buf</strong> (<em>buf</em>) – the bytes of the command body</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>AlertsNotification</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.set_field_names">
+<em class="property"> </em><code class="sig-name descname">set_field_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.set_field_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua staticmethod">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.build_test_rx">
+<em class="property">static </em><code class="sig-name descname">build_test_rx</code><span class="sig-paren">(</span><em class="sig-param">device</em>, <em class="sig-param">alerts_count</em>, <em class="sig-param">alert_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.build_test_rx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a version of this message as if it came from the device</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>device</strong> (<a class="reference internal" href="../../device.html#st.zigbee.Device" title="st.zigbee.Device"><em>st.zigbee.Device</em></a>) – the device to build the message from</p></li>
+<li><p><strong>alerts_count</strong> (<a class="reference internal" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount" title="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount"><em>st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount</em></a>) – </p></li>
+<li><p><strong>alert_structure</strong> (<em>list[st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The full Zigbee message containing this command body</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../messages.html#st.zigbee.ZigbeeMessageRx" title="st.zigbee.ZigbeeMessageRx">st.zigbee.ZigbeeMessageRx</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.init">
+<em class="property"> </em><code class="sig-name descname">init</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">device</em>, <em class="sig-param">alerts_count</em>, <em class="sig-param">alert_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the AlertsNotification command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> (<em>AlertsNotification</em>) – the template class for this command</p></li>
+<li><p><strong>device</strong> (<a class="reference internal" href="../../device.html#st.zigbee.Device" title="st.zigbee.Device"><em>st.zigbee.Device</em></a>) – the device to build this message to</p></li>
+<li><p><strong>alerts_count</strong> (<a class="reference internal" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount" title="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount"><em>st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount</em></a>) – </p></li>
+<li><p><strong>alert_structure</strong> (<em>list[st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the full command addressed to the device</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../messages.html#st.zigbee.ZigbeeMessageTx" title="st.zigbee.ZigbeeMessageTx">st.zigbee.ZigbeeMessageTx</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.set_parent_cluster">
+<em class="property"> </em><code class="sig-name descname">set_parent_cluster</code><span class="sig-paren">(</span><em class="sig-param">cluster</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.AlertsNotification.set_parent_cluster" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cluster</strong> (<em>any</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="lua class">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification">
+<em class="property">class </em><code class="sig-name descname">st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification</code><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.ID">
+<code class="sig-name descname">ID</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.ID" title="Permalink to this definition">¶</a></dt>
+<dd><p>0x02 the ID of this command</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.NAME">
+<code class="sig-name descname">NAME</code><em class="property">: </em>str<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>“EventNotification” the name of this command</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.event_header">
+<code class="sig-name descname">event_header</code><em class="property">: </em>st.zigbee.data_types.Uint8<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.event_header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.event_id">
+<code class="sig-name descname">event_id</code><em class="property">: </em>st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.event_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.get_fields">
+<em class="property"> </em><code class="sig-name descname">get_fields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.get_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua staticmethod">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.deserialize">
+<em class="property">static </em><code class="sig-name descname">deserialize</code><span class="sig-paren">(</span><em class="sig-param">buf</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.deserialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deserialize this command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>buf</strong> (<em>buf</em>) – the bytes of the command body</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>EventNotification</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.set_field_names">
+<em class="property"> </em><code class="sig-name descname">set_field_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.set_field_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua staticmethod">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.build_test_rx">
+<em class="property">static </em><code class="sig-name descname">build_test_rx</code><span class="sig-paren">(</span><em class="sig-param">device</em>, <em class="sig-param">event_header</em>, <em class="sig-param">event_id</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.build_test_rx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a version of this message as if it came from the device</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>device</strong> (<a class="reference internal" href="../../device.html#st.zigbee.Device" title="st.zigbee.Device"><em>st.zigbee.Device</em></a>) – the device to build the message from</p></li>
+<li><p><strong>event_header</strong> (<a class="reference internal" href="../../data_types.html#st.zigbee.data_types.Uint8" title="st.zigbee.data_types.Uint8"><em>st.zigbee.data_types.Uint8</em></a>) – </p></li>
+<li><p><strong>event_id</strong> (<a class="reference internal" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId" title="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId"><em>st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The full Zigbee message containing this command body</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../messages.html#st.zigbee.ZigbeeMessageRx" title="st.zigbee.ZigbeeMessageRx">st.zigbee.ZigbeeMessageRx</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.init">
+<em class="property"> </em><code class="sig-name descname">init</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">device</em>, <em class="sig-param">event_header</em>, <em class="sig-param">event_id</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the EventNotification command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> (<em>EventNotification</em>) – the template class for this command</p></li>
+<li><p><strong>device</strong> (<a class="reference internal" href="../../device.html#st.zigbee.Device" title="st.zigbee.Device"><em>st.zigbee.Device</em></a>) – the device to build this message to</p></li>
+<li><p><strong>event_header</strong> (<a class="reference internal" href="../../data_types.html#st.zigbee.data_types.Uint8" title="st.zigbee.data_types.Uint8"><em>st.zigbee.data_types.Uint8</em></a>) – </p></li>
+<li><p><strong>event_id</strong> (<a class="reference internal" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId" title="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId"><em>st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the full command addressed to the device</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../messages.html#st.zigbee.ZigbeeMessageTx" title="st.zigbee.ZigbeeMessageTx">st.zigbee.ZigbeeMessageTx</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.set_parent_cluster">
+<em class="property"> </em><code class="sig-name descname">set_parent_cluster</code><span class="sig-paren">(</span><em class="sig-param">cluster</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.EventNotification.set_parent_cluster" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cluster</strong> (<em>any</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="applianceeventsalerts-types">
+<h2>ApplianceEventsAlerts Types<a class="headerlink" href="#applianceeventsalerts-types" title="Permalink to this headline">¶</a></h2>
+<dl class="lua class">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount">
+<em class="property">class </em><code class="sig-name descname">st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount</code><em class="property">: </em><a class="reference internal" href="../../data_types.html#st.zigbee.data_types.Uint8" title="st.zigbee.data_types.Uint8">st.zigbee.data_types.Uint8</a><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.byte_length">
+<code class="sig-name descname">byte_length</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.byte_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>1</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.NUM_ALERTS">
+<code class="sig-name descname">NUM_ALERTS</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.NUM_ALERTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>15</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.ALERT_TYPE">
+<code class="sig-name descname">ALERT_TYPE</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.ALERT_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>240</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.is_num_alerts_set">
+<em class="property"> </em><code class="sig-name descname">is_num_alerts_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.is_num_alerts_set" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the value of NUM_ALERTS is non-zero</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.set_num_alerts">
+<em class="property"> </em><code class="sig-name descname">set_num_alerts</code><span class="sig-paren">(</span><em class="sig-param">fieldVal</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.set_num_alerts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the bits in the NUM_ALERTS field</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fieldVal</strong> (<em>number</em>) – the value to set the bitfield to</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.get_num_alerts">
+<em class="property"> </em><code class="sig-name descname">get_num_alerts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.get_num_alerts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of the bits in the NUM_ALERTS field</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.unset_num_alerts">
+<em class="property"> </em><code class="sig-name descname">unset_num_alerts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.unset_num_alerts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the bits in the NUM_ALERTS field to 0</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.is_alert_type_set">
+<em class="property"> </em><code class="sig-name descname">is_alert_type_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.is_alert_type_set" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the value of ALERT_TYPE is non-zero</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.set_alert_type">
+<em class="property"> </em><code class="sig-name descname">set_alert_type</code><span class="sig-paren">(</span><em class="sig-param">fieldVal</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.set_alert_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the bits in the ALERT_TYPE field</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fieldVal</strong> (<em>number</em>) – the value to set the bitfield to</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.get_alert_type">
+<em class="property"> </em><code class="sig-name descname">get_alert_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.get_alert_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of the bits in the ALERT_TYPE field</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.unset_alert_type">
+<em class="property"> </em><code class="sig-name descname">unset_alert_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertsCount.unset_alert_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the bits in the ALERT_TYPE field to 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="lua class">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure">
+<em class="property">class </em><code class="sig-name descname">st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure</code><em class="property">: </em><a class="reference internal" href="../../data_types.html#st.zigbee.data_types.Uint24" title="st.zigbee.data_types.Uint24">st.zigbee.data_types.Uint24</a><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.byte_length">
+<code class="sig-name descname">byte_length</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.byte_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>3</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.ALERT_ID">
+<code class="sig-name descname">ALERT_ID</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.ALERT_ID" title="Permalink to this definition">¶</a></dt>
+<dd><p>255</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.CATEGORY">
+<code class="sig-name descname">CATEGORY</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.CATEGORY" title="Permalink to this definition">¶</a></dt>
+<dd><p>3840</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.PRESENCE_RECOVERY">
+<code class="sig-name descname">PRESENCE_RECOVERY</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.PRESENCE_RECOVERY" title="Permalink to this definition">¶</a></dt>
+<dd><p>12288</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.UNUSED">
+<code class="sig-name descname">UNUSED</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.UNUSED" title="Permalink to this definition">¶</a></dt>
+<dd><p>49152</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.MANUFACTURER_SPECIFIC">
+<code class="sig-name descname">MANUFACTURER_SPECIFIC</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.MANUFACTURER_SPECIFIC" title="Permalink to this definition">¶</a></dt>
+<dd><p>16711680</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.is_alert_id_set">
+<em class="property"> </em><code class="sig-name descname">is_alert_id_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.is_alert_id_set" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the value of ALERT_ID is non-zero</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.set_alert_id">
+<em class="property"> </em><code class="sig-name descname">set_alert_id</code><span class="sig-paren">(</span><em class="sig-param">fieldVal</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.set_alert_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the bits in the ALERT_ID field</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fieldVal</strong> (<em>number</em>) – the value to set the bitfield to</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.get_alert_id">
+<em class="property"> </em><code class="sig-name descname">get_alert_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.get_alert_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of the bits in the ALERT_ID field</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.unset_alert_id">
+<em class="property"> </em><code class="sig-name descname">unset_alert_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.unset_alert_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the bits in the ALERT_ID field to 0</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.is_category_set">
+<em class="property"> </em><code class="sig-name descname">is_category_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.is_category_set" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the value of CATEGORY is non-zero</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.set_category">
+<em class="property"> </em><code class="sig-name descname">set_category</code><span class="sig-paren">(</span><em class="sig-param">fieldVal</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.set_category" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the bits in the CATEGORY field</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fieldVal</strong> (<em>number</em>) – the value to set the bitfield to</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.get_category">
+<em class="property"> </em><code class="sig-name descname">get_category</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.get_category" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of the bits in the CATEGORY field</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.unset_category">
+<em class="property"> </em><code class="sig-name descname">unset_category</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.unset_category" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the bits in the CATEGORY field to 0</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.is_presence_recovery_set">
+<em class="property"> </em><code class="sig-name descname">is_presence_recovery_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.is_presence_recovery_set" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the value of PRESENCE_RECOVERY is non-zero</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.set_presence_recovery">
+<em class="property"> </em><code class="sig-name descname">set_presence_recovery</code><span class="sig-paren">(</span><em class="sig-param">fieldVal</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.set_presence_recovery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the bits in the PRESENCE_RECOVERY field</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fieldVal</strong> (<em>number</em>) – the value to set the bitfield to</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.get_presence_recovery">
+<em class="property"> </em><code class="sig-name descname">get_presence_recovery</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.get_presence_recovery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of the bits in the PRESENCE_RECOVERY field</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.unset_presence_recovery">
+<em class="property"> </em><code class="sig-name descname">unset_presence_recovery</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.unset_presence_recovery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the bits in the PRESENCE_RECOVERY field to 0</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.is_unused_set">
+<em class="property"> </em><code class="sig-name descname">is_unused_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.is_unused_set" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the value of UNUSED is non-zero</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.set_unused">
+<em class="property"> </em><code class="sig-name descname">set_unused</code><span class="sig-paren">(</span><em class="sig-param">fieldVal</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.set_unused" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the bits in the UNUSED field</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fieldVal</strong> (<em>number</em>) – the value to set the bitfield to</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.get_unused">
+<em class="property"> </em><code class="sig-name descname">get_unused</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.get_unused" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of the bits in the UNUSED field</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.unset_unused">
+<em class="property"> </em><code class="sig-name descname">unset_unused</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.unset_unused" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the bits in the UNUSED field to 0</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.is_manufacturer_specific_set">
+<em class="property"> </em><code class="sig-name descname">is_manufacturer_specific_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.is_manufacturer_specific_set" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the value of MANUFACTURER_SPECIFIC is non-zero</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.set_manufacturer_specific">
+<em class="property"> </em><code class="sig-name descname">set_manufacturer_specific</code><span class="sig-paren">(</span><em class="sig-param">fieldVal</em><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.set_manufacturer_specific" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the bits in the MANUFACTURER_SPECIFIC field</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fieldVal</strong> (<em>number</em>) – the value to set the bitfield to</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.get_manufacturer_specific">
+<em class="property"> </em><code class="sig-name descname">get_manufacturer_specific</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.get_manufacturer_specific" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of the bits in the MANUFACTURER_SPECIFIC field</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.unset_manufacturer_specific">
+<em class="property"> </em><code class="sig-name descname">unset_manufacturer_specific</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.AlertStructure.unset_manufacturer_specific" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the bits in the MANUFACTURER_SPECIFIC field to 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="lua class">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId">
+<em class="property">class </em><code class="sig-name descname">st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId</code><em class="property">: </em><a class="reference internal" href="../../data_types.html#st.zigbee.data_types.Uint8" title="st.zigbee.data_types.Uint8">st.zigbee.data_types.Uint8</a><a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId.byte_length">
+<code class="sig-name descname">byte_length</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId.byte_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>1</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId.END_OF_CYCLE">
+<code class="sig-name descname">END_OF_CYCLE</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId.END_OF_CYCLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>0</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId.SET_TEMPERATURE_REACHED">
+<code class="sig-name descname">SET_TEMPERATURE_REACHED</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId.SET_TEMPERATURE_REACHED" title="Permalink to this definition">¶</a></dt>
+<dd><p>4</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId.END_OF_COOKING">
+<code class="sig-name descname">END_OF_COOKING</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId.END_OF_COOKING" title="Permalink to this definition">¶</a></dt>
+<dd><p>5</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId.SWITCHING_OFF">
+<code class="sig-name descname">SWITCHING_OFF</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId.SWITCHING_OFF" title="Permalink to this definition">¶</a></dt>
+<dd><p>6</p>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId.WRONG_DATA">
+<code class="sig-name descname">WRONG_DATA</code><em class="property">: </em>number<a class="headerlink" href="#st.zigbee.zcl.clusters.ApplianceEventsAlerts.types.EventId.WRONG_DATA" title="Permalink to this definition">¶</a></dt>
+<dd><p>247</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ElectricalMeasurement.html" class="btn btn-neutral float-right" title="ElectricalMeasurement" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SimpleMetering.html" class="btn btn-neutral" title="SimpleMetering" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, SmartThings Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> and ❤️  using a custom <a href="https://github.com/LinxiFan/Sphinx-theme">theme</a> based on <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

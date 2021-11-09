@@ -1,0 +1,65 @@
+Z-Wave Device Class
+===================
+
+The :lua:class:`st.zwave.Device <st.zwave.Device>` class inherits from :lua:class:`Device <Device>`, extending behavior
+with Z-Wave-specific functionality.  Device objects are instantiated by the framework and passed to drivers as parameters
+for device-related methods.
+
+Sleepy devices
++++++++++++++++++++++++
+
+Sleepy devices present unique use cases for a Z-Wave controller since communication can only occur when the device is awake.
+One particular case is when a sleepy device's preferences are updated and it is asleep, any configuration commands for the
+device cannot be sent until the device wakes up. To allow for sending device configuration commands when the device wakes up,
+a driver can set an ``update_preferences`` function on a device which will get called when the device wakes up. The function is provided
+``args`` which are similar to the args on the ``infoChanged`` lifecycle event and contain the ``old_st_store.preferences`` with the
+preferences that were present the last time the device woke up. Note that there will still be an ``infoChanged`` event for
+sleepy devices, and this automatic preference update mechanism only works for devices that support the WakeUp command class.
+The following is an example of how this functionality should be handled in a driver that supports *both listening and
+sleepy devices*:
+
+.. code-block:: lua
+
+    local capabilities = require "st.capabilities"
+    --- @type st.zwave.Driver
+    local ZwaveDriver = require "st.zwave"
+    --- @type st.zwave.defaults
+    local defaults = require "st.zwave.defaults"
+    local cc = require "st.zwave.CommandClass"
+
+    local function update_preferences(self, device, args)
+      if args.old_st_store.prefrences["my_pref"] ~= device.preferences["my_pref"] then
+        -- send commands if you need
+      end
+    end
+
+    local function device_init(self, device)
+      device:set_update_preferences_fn(update_preferences)
+    end
+
+    local function info_changed(self, device, event, args)
+      -- only update preferences for devices we know are awake
+      -- if this driver only supports sleepy devices, an infoChanged handler may not be needed at all.
+      if ~device:is_cc_supported(cc.WAKE_UP) then
+        update_preferences(self, device, args)
+      end
+    end
+
+    local zwave_contact_driver = {
+      supported_capabilities = {
+        capabilities.contactSensor,
+        capabilities.battery
+      },
+      lifecycle_handlers = {
+        init = device_init,
+        infoChanged = info_changed,
+      },
+    }
+
+    defaults.register_for_default_handlers(zwave_contact_driver, zwave_contact_driver.supported_capabilities)
+    --- @type st.zwave.Driver
+    local contact_sensor = ZwaveDriver("zwave_contact_sensor", zwave_contact_driver)
+    contact_sensor:run()
+
+
+.. lua:autoclass:: st.zwave.Device
