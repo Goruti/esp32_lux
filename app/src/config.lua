@@ -37,6 +37,6 @@ RED_LED=32
 BLUE_LED=33
 
 --------------
--- TSL2561
-SDA_PIN = 21
-SCL_PIN = 22
+-- TSL2591
+SDA_PIN = 18
+SCL_PIN = 19

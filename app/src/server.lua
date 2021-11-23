@@ -102,23 +102,28 @@ end
 
 --------------------
 -- Push Remote State
-local function push_state(data)
+function push_state(data)
     if not DEV.HUB.addr or not DEV.HUB.port then
         print('NO HUB REGISTERED')
         return nil
     end
 
     -- Prepare URL
-    local url = string.format(
-            'http://%s:%s/push-state', DEV.HUB.addr, DEV.HUB.port)
+    local url = string.format('http://%s:%s/push-state', DEV.HUB.addr, DEV.HUB.port)
     -- JSONstringify table
     data.uuid = DEV.HUB.ext_uuid
     local data = sjson.encode(data)
+    local headers = 'Content-Type: application/json'
 
     print('PUSH STATE\r\nURL: '..url..'\r\nDATA: '..data)
-    return http.post(
-            url,'Content-Type: application/json\r\n',data,
-            function(code, data) print(code, data) end)
+    return http.post(url, { headers = headers }, data,
+            function(code, data)
+                if (code < 0) then
+                  print("HTTP request failed")
+                else
+                  print(code, data)
+                end
+            end)
 end
 
 -----------------

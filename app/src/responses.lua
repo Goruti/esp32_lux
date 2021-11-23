@@ -91,27 +91,6 @@ function res_handler.WIFI_CONFIG_VIEW(nets)
     },'\r\n')
 end
 
-
-res_handler.WIFI_CONFIG_VIEW_BKP =
-[[<!DOCTYPE html><html>
-<head>
-<meta name="viewport"
-content="width=device-width, initial-scale=1">
-</head>
-<body>
-<h3>Wifi setup</h3>
-<p>Configure your WiFi Router</p>
-<form>
-  <label for="ssid">SSID:</label><br>
-  <input type="text" id="ssid" name="ssid"><br>
-  <label for="pwd">Password:</label><br>
-  <input type="password" id="pwd" name="pwd"><br>
-  <br>
-  <button type="submit">Connect</button>
-</form>
-</body>
-</html>]]
-
 res_handler.INTERNAL_ERROR = "Internal Server Error"
 res_handler.METHOD_NOT_ALLOWED = "Method Not Allowed"
 res_handler.NOT_FOUND = "Page or File Not Found "
