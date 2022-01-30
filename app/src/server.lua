@@ -1,6 +1,5 @@
 local res = require('responses')
 
-
 ----------------------
 -- Decode URI
 local function hex_to_char(x)

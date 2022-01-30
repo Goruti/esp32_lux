@@ -1,3 +1,5 @@
+dofile('upnp.lua')
+
 -- Init main network services
 function wifi_sta_start(ssid, pwd)
     local wifi_config = {
