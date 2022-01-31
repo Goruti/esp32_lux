@@ -21,7 +21,7 @@ WIFI_AP_CONFIG = {
 DEV = {
     CHIP_ID=string.format('%x', node.chipid()),
     SN='SN-ESP32-696',
-    MN='SmartThingsCommunity',
+    MN='DiegoAntonino',
     NAME='LuxSensorESP32',
     TYPE='LAN',
     ext_uuid=nil,
@@ -38,10 +38,7 @@ BLUE_LED=33
 
 --------------
 -- TSL2591
-<<<<<<< HEAD
-SDA_PIN = 21
-SCL_PIN = 22
-=======
-SDA_PIN = 18
-SCL_PIN = 19
->>>>>>> a35279a6e19106d48716b08e340b891b837b8729
+ID=0
+SDA_PIN=18
+SCL_PIN=19
+LOOP_TIME_MS=5000

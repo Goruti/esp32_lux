@@ -5,15 +5,17 @@ function lux_init()
     -- set gain and integration time
     -- see tsl2591.lua for a list of options
     tsl2591.set_gain(TSL2591_GAIN_25X, TSL2591_INT_TIME_600MS)
-
+    collectgarbage()
+end
 
 function lux_reading_start()
     lux_init()
-    while true do
+    tmr.create():alarm(LOOP_TIME_MS, tmr.ALARM_AUTO, function()
         vis, ir = tsl2591.read()
         print("CH0 (visible):", vis)
         print("CH1 (IR):", ir)
-        wait(1)
-        end
+        collectgarbage()
+    end)
+end
 
 
