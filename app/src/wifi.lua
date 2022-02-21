@@ -87,7 +87,7 @@ wifi.sta.on(
             --Turn ON WIFI LED
             gpio.write(BLUE_LED, 1)
             -- initialize ssdp session
-            --upnp_start()
+            upnp_start()
         end)
 
 -- ACCESS POINT Start
