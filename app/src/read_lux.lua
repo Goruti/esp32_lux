@@ -9,20 +9,17 @@ function lux_init()
 end
 
 function lux_reading_start()
-    if DEV.HUB.addr and DEV.HUB.port then
-        lux_init()
-        tmr.create():alarm(LOOP_TIME_MS, tmr.ALARM_AUTO, function()
-            vis, ir = tsl2591.read()
+    lux_init()
+    tmr.create():alarm(TSL_LOOP_TIME_MS, tmr.ALARM_AUTO, function()
+        vis, ir = tsl2591.read()
 
-            print("CH0 (visible):", vis)
-            print("CH1 (IR):", ir)
+        print("CH0 (visible):", vis)
+        print("CH1 (IR):", ir)
 
-            nofify_st({
-                lux = vis
-            })
-            collectgarbage()
-        end)
-    end
+        DEV.cache.lux = vis
+        nofify_st({ lux = vis })
+        collectgarbage()
+    end)
 end
 
 function nofify_st(lux_body)

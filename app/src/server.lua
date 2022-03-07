@@ -42,37 +42,42 @@ local function parseUri(uri)
         r.path = uri
         return r
     end
+    r.path = uri:sub(0, questionMarkPos-1)
     r.args = parseArgs(uri:sub(questionMarkPos+1, #uri))
     return r
 end
 
 ----------------------
 -- Get Body
-local function getBody(payload)
+local function getBody(request)
     local getBody
     return function ()
-        --print("Getting Request Data")
+        print("Getting Request Data")
         if getBody then
             return getBody
         else
-            --print("payload = [",  payload, "]")
+            print("payload = [",  request, "]")
 
-            local mimeType = string.match(payload, "Content%-Type: ([%w/-]+)")
-            local bodyStart = payload:find("\r\n\r\n", 1, true)
-            local body = payload:sub(bodyStart, #payload)
-            payload = nil
-            collectgarbage()
-            --print("mimeType = [", mimeType, "]")
-            --print("bodyStart = [", bodyStart, "]")
-            --print("body = [", body, "]")
-
-            if mimeType == "application/json" then
-                --print("JSON: " .. body)
-                getBody = sjson.decode(body)
-            elseif mimeType == "application/x-www-form-urlencoded" then
-                getBody = parseFormData(body)
-            else
+            local mimeType = string.match(request, "Content%-Type: ([%w/-]+)")
+            local bodyStart = request:find("\r\n\r\n", 1, true)
+            if not bodyStart then
                 getBody = {}
+            else
+                local body = request:sub(bodyStart, #request)
+                request = nil
+                collectgarbage()
+                --print("mimeType = [", mimeType, "]")
+                --print("bodyStart = [", bodyStart, "]")
+                --print("body = [", body, "]")
+
+                if mimeType == "application/json" then
+                    --print("JSON: " .. body)
+                    getBody = sjson.decode(body)
+                elseif mimeType == "application/x-www-form-urlencoded" then
+                    getBody = parseFormData(body)
+                else
+                    getBody = {}
+                end
             end
             return getBody
         end
@@ -92,8 +97,8 @@ local function httpparse(request)
         print("invalid request: ")
         return nil
     end
-    --print("r.method: \n", r.method)
-    --print("raw_uri: \n", raw_uri)
+    print("r.method: \n", r.method)
+    print("raw_uri: \n", raw_uri)
     r.uri = parseUri(raw_uri)
     r.getBody = getBody(request)
     return r
@@ -131,13 +136,23 @@ function server_start()
     -- Request receiver calback
     local function recv_cb(conn, data)
         -- parse http data
+        print("***** NEW REQUEST *****")
         local r = httpparse(data)
-        print("final r: \n", sjson.encode(r))
+
+        if r == nil then
+            collectgarbage()
+            return conn:send(res.error("400", res.BAD_REQUEST))
+        end
+
+        print("r: ", sjson.encode(r))
 
         -- Collect WiFi Configuration
         -- params to initialize Wifi
         -- Station service.
         if r.method == "POST" then
+
+            -- Resource that will allow to
+            -- configure wifi
             if r.uri.path:find('/config_wifi') then
                 r.body = r.getBody()
                 if r.body.ssid and r.body.pwd then
@@ -148,10 +163,41 @@ function server_start()
                     --end
                     --print("going to set up wifi with ssid", r.body.ssid, "and pwd: ", r.body.pwd)
                     wifi_sta_start(r.body.ssid, r.body.pwd)
-                    conn:send(res.error("200", res.REDIRECT_VIEW))
+                    return conn:send(res.error("200", res.REDIRECT_VIEW))
+                else
+                    return conn:send(res.error("400", res.BAD_REQUEST))
                 end
+
+            -- Resource that will allow to
+            -- register a parent node (Hub)
+            -- storing its address and port.
+            elseif r.uri.path:find('/ping') then
+
+                if r.uri.args.ip and r.uri.args.port and r.uri.args.ext_uuid then
+                    DEV.HUB.addr = r.uri.args.ip
+                    DEV.HUB.port = r.uri.args.port
+                    DEV.HUB.ext_uuid = r.uri.args.ext_uuid
+                    print(
+                            '\r\nPING\r\nHUB LOCATION: http://'..
+                                    DEV.HUB.addr..':'..DEV.HUB.port..
+                                    '\r\nEXT_UUID: '..DEV.HUB.ext_uuid)
+                    return conn:send(res.error("200"))
+                else
+                    return conn:send(res.error("400", res.BAD_REQUEST))
+                end
+
+            -- Resource that allows to
+            -- unlink the registered
+            -- parent node (Hub)
+            elseif r.uri.path:find('/delete') then
+                print('HUB REVOKED')
+                DEV.HUB.addr = nil
+                DEV.HUB.port = nil
+                DEV.HUB.ext_uuid = nil
+                return conn:send(res.error("200"))
+
             else
-                conn:send(
+                return conn:send(
                         res.error("404", res.NOT_FOUND)
                 )
             end -- end POST routing PATHS
@@ -164,44 +210,13 @@ function server_start()
             if r.uri.path:find(DEV.NAME..'.xml') then
                 return conn:send(res.error("200", res.DEVICE_INFO_XML))
 
-                -- Resource that will allow to
-                -- register a parent node (Hub)
-                -- storing its address and port.
-            elseif r.uri.path:find('/ping') then
-                if r.args.ip and r.args.port then
-                    DEV.HUB.addr = r.args.ip
-                    DEV.HUB.port = r.args.port
-                    DEV.HUB.ext_uuid = r.args.ext_uuid
-                    print(
-                            '\r\nPING\r\nHUB LOCATION: http://'..
-                                    r.args.ip..':'..r.args.port..
-                                    '\r\nEXT_UUID: '..r.args.ext_uuid)
-                    return conn:send(res.error("200"))
-                end
-
                 -- Resource that will allow
                 -- device state poll retrieving
                 -- the raw state at the DEV.cache
                 -- table JSON formatted.
             elseif r.uri.path:find('/refresh') then
+                print("Sending cache info: ", sjson.encode(DEV.cache))
                 return conn:send(res.error("200", DEV.cache))
-
-                -- Resource that allows to
-                -- unlink the registered
-                -- parent node (Hub)
-            elseif r.uri.path:find('/delete') then
-                print('HUB REVOKED')
-                DEV.HUB.addr = nil
-                DEV.HUB.port = nil
-                DEV.HUB.ext_uuid = nil
-                return conn:send(res.error("200"))
-
-                -- Resource that allows device
-                -- control either at the ST App
-                -- or at browsers
-            elseif r.uri.path:find('/control') then
-                -- For future implementations
-                return conn:send(res.error("200"))
 
                 -- Resource that allows
                 -- WIFI CONFIGURATION
@@ -215,22 +230,24 @@ function server_start()
                 wifi.sta.scan({}, function(err, arr)
                     if err then
                         print ("Scan failed:", err)
-                        conn:send(
+                        return conn:send(
                                 res.error("500", res.WIFI_ERROR)
                         )
                     else
-                        conn:send(
+                        return conn:send(
                                 res.error("200", res.WIFI_CONFIG_VIEW(sjson.encode(arr)))
                         )
                     end
                 end)
             else
-                conn:send(
+                return conn:send(
                         res.error("404", res.NOT_FOUND)
                 )
             end   -- end GET routing PATHS
         else  -- else Method routing
-            res.error("405", res.METHOD_NOT_ALLOWED)
+            return conn:send(
+                    res.error("405", res.METHOD_NOT_ALLOWED)
+            )
         end -- end Method routing
         r = nil
         collectgarbage()

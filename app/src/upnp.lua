@@ -28,8 +28,11 @@ function upnp_start()
         local req = httpparse(payload)
         local headers = req.headers
 
-        print('INCOMING TRAFFIC:\r\n'..payload..'\r\n')
+        --print('INCOMING TRAFFIC:\r\n'..payload..'\r\n')
+        --print('INCOMING TRAFFIC:\r\n'..sjson.encode(req)..'\r\n')
+
         if req and req.status:find('M-SEARCH') then
+            --print('INCOMING TRAFFIC:\r\n'..sjson.encode(req)..'\r\n')
             if headers.st:find(DEV.MN) and headers.st:find(DEV.NAME) then
                 --print('DISCOVERY STREAM:\r\n'..payload..'\r\n')
                 print('SSDP RESPONSE:\r\n'..SSDP_RES..'\r\n')
@@ -45,8 +48,10 @@ function upnp_start()
     -- Close UDP socket
     -- end  session
     local function close_cb(conn)
-        conn:close()
-        net.multicastLeave('', MC_ADDR)
+        if pcall(conn:close()) then
+            net.multicastLeave('', MC_ADDR)
+        end
+
     end
 
     -- Init socket

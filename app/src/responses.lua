@@ -23,6 +23,8 @@ function res_handler.error(error_code, body)
             -- XML Response
         elseif body:find('xml') then
             cnt_type = 'Content-Type: text/xml'
+        else
+            cnt_type = 'Content-Type: text/plain'
         end
         -- JSON Response
     elseif type(body) == 'table' then
@@ -93,7 +95,8 @@ end
 
 res_handler.INTERNAL_ERROR = "Internal Server Error"
 res_handler.METHOD_NOT_ALLOWED = "Method Not Allowed"
-res_handler.NOT_FOUND = "Page or File Not Found "
+res_handler.NOT_FOUND = "Page or File Not Found"
+res_handler.BAD_REQUEST = "Bad Request"
 
 res_handler.WIFI_ERROR =
 [[<!DOCTYPE html><html>
@@ -170,12 +173,12 @@ table.concat({
     "<minor>0</minor>",
     "</specVersion>",
     "<device>",
-    "<deviceType>urn:DiegoAntonino:device:LuxSensor:1</deviceType>",
+    "<deviceType>urn:DiegoAntonino:device:LuxSensorESP32:1</deviceType>",
     "<presentationURL>/</presentationURL>",
     "<friendlyName>"..DEV.NAME.."</friendlyName>",
     "<manufacturer>"..DEV.MN.."</manufacturer>",
     "<manufacturerURL>https://community.smartthings.com</manufacturerURL>",
-    "<modelName>Lux Sensor</modelName>",
+    "<modelName>ESP32 Lux Sensor</modelName>",
     "<serialNumber>"..DEV.SN.."</serialNumber>",
     "<UDN>uuid:"..DEV.CHIP_ID.."-"..DEV.SN.."</UDN>",
     "</device></root>"

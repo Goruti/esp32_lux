@@ -1,0 +1,5 @@
+name: 'LAN LuxSensor'
+packageKey: 'LAN-LuxSensor'
+permissions:
+  lan: {}
+  discovery: {}

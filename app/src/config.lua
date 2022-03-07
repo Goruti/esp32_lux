@@ -26,7 +26,7 @@ DEV = {
     TYPE='LAN',
     ext_uuid=nil,
     HUB={ addr=nil, port=nil },
-    cache={},
+    cache={ lux=nil },
     IP_ADDR=nil
 }
 
@@ -42,4 +42,4 @@ TSL_ID=0
 TSL_INT_PIN=27
 TSL_SCL_PIN=18
 TSL_SDA_PIN=19
-TSL_LOOP_TIME_MS=5000
+TSL_LOOP_TIME_MS=150000
