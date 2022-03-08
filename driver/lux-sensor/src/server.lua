@@ -15,14 +15,14 @@ function hub_server.start(driver)
     -- Endpoint
     server:post('/push-state', function (req, res)
         local body = json.decode(req:get_body())
-        print(json.encode(body))
-
+        log.trace("[push-state:in:body]"..json.encode(body))
         local device = driver:get_device_info(body.uuid)
         if body.lux then
             driver:set_lux(device, tonumber(body.lux))
         end
         res:send('HTTP/1.1 200 OK')
     end)
+
     server:listen()
     driver.server = server
 end

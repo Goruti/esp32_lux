@@ -52,11 +52,11 @@ end
 local function getBody(request)
     local getBody
     return function ()
-        print("Getting Request Data")
+        --print("Getting Request Data")
         if getBody then
             return getBody
         else
-            print("payload = [",  request, "]")
+            --print("payload = [",  request, "]")
 
             local mimeType = string.match(request, "Content%-Type: ([%w/-]+)")
             local bodyStart = request:find("\r\n\r\n", 1, true)
@@ -94,11 +94,11 @@ local function httpparse(request)
     local _, i, raw_uri
     _, i, r.method, raw_uri = line:find("^([A-Z]+) (.-) HTTP/[1-9]+.[0-9]+$")
     if r.method ~= "POST" and r.method ~= "GET" then
-        print("invalid request: ")
+        --print("invalid request: ")
         return nil
     end
-    print("r.method: \n", r.method)
-    print("raw_uri: \n", raw_uri)
+    --print("r.method: \n", r.method)
+    --print("raw_uri: \n", raw_uri)
     r.uri = parseUri(raw_uri)
     r.getBody = getBody(request)
     return r
@@ -106,7 +106,7 @@ end
 
 --------------------
 -- Push Remote State
-function push_state(data)
+function push_state(body)
     if not DEV.HUB.addr or not DEV.HUB.port then
         print('NO HUB REGISTERED')
         return nil
@@ -115,19 +115,23 @@ function push_state(data)
     -- Prepare URL
     local url = string.format('http://%s:%s/push-state', DEV.HUB.addr, DEV.HUB.port)
     -- JSONstringify table
-    data.uuid = DEV.HUB.ext_uuid
-    local data = sjson.encode(data)
-    local headers = 'Content-Type: application/json'
+    body.uuid = DEV.HUB.ext_uuid
+    local headers = {
+        ["Content-Type"] = "application/json"
+    }
 
-    print('PUSH STATE\r\nURL: '..url..'\r\nDATA: '..data)
-    return http.post(url, { headers = headers }, data,
-            function(code, data)
-                if (code < 0) then
-                  print("HTTP request failed")
-                else
-                  print(code, data)
-                end
-            end)
+    print('PUSH STATE\r\nURL: '..url..'\r\nDATA: '..sjson.encode(body))
+    http.post(url, { headers = headers }, sjson.encode(body),
+        function(code, data)
+            if (code < 0) then
+                print("HTTP request failed")
+                gpio.write(RED_LED, 1)
+            else
+                gpio.write(RED_LED, 0)
+            end
+        end
+    )
+
 end
 
 -----------------
@@ -173,12 +177,11 @@ function server_start()
             -- storing its address and port.
             elseif r.uri.path:find('/ping') then
 
-                if r.uri.args.ip and r.uri.args.port and r.uri.args.ext_uuid then
+                if r.uri.args and r.uri.args.ip and r.uri.args.port and r.uri.args.ext_uuid then
                     DEV.HUB.addr = r.uri.args.ip
                     DEV.HUB.port = r.uri.args.port
                     DEV.HUB.ext_uuid = r.uri.args.ext_uuid
-                    print(
-                            '\r\nPING\r\nHUB LOCATION: http://'..
+                    print('HUB LOCATION: http://'..
                                     DEV.HUB.addr..':'..DEV.HUB.port..
                                     '\r\nEXT_UUID: '..DEV.HUB.ext_uuid)
                     return conn:send(res.error("200"))
