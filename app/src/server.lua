@@ -124,14 +124,25 @@ function push_state(body)
     http.post(url, { headers = headers }, sjson.encode(body),
         function(code, data)
             if (code < 0) then
-                print("HTTP request failed")
+                print("Failed to Notify Smartthings")
                 gpio.write(RED_LED, 1)
+                node.restart()
             else
                 gpio.write(RED_LED, 0)
             end
         end
     )
 
+
+    --http.post(string.format('https://groker.init.st/api/events?accessKey=ist_73z7zXBcI7aydN3HwA0HU_JLYddDXZh4&bucketKey=QGR99BBNVJLE&lux=%s', body.lux),
+    --        nil,
+    --        "",
+    --        function(code, data)
+    --            if (code < 0) then
+    --                print("HTTP request failed to send values to initial state")
+    --            end
+    --        end
+    --)
 end
 
 -----------------
