@@ -86,7 +86,7 @@ end
 -----------------------
 -- HTTP Response Parser
 local function httpparse(request)
-    print("Request: \n", request)
+    --print("Request: \n", request)
     local e = request:find("\r\n", 1, true)
     if not e then return nil end
     local line = request:sub(1, e - 1)
@@ -107,8 +107,8 @@ end
 --------------------
 -- Push Remote State
 function push_state(body)
-    if not DEV.HUB.addr or not DEV.HUB.port then
-        print('NO HUB REGISTERED')
+    if not DEV.HUB.addr or not DEV.HUB.port or not DEV.HUB.ext_uuid then
+        --print('NO HUB REGISTERED')
         return nil
     end
 
@@ -120,13 +120,13 @@ function push_state(body)
         ["Content-Type"] = "application/json"
     }
 
-    print('PUSH STATE\r\nURL: '..url..'\r\nDATA: '..sjson.encode(body))
+    --print('PUSH STATE\r\nURL: '..url..'\r\nDATA: '..sjson.encode(body))
     http.post(url, { headers = headers }, sjson.encode(body),
         function(code, data)
             if (code < 0) then
                 print("Failed to Notify Smartthings")
                 gpio.write(RED_LED, 1)
-                node.restart()
+                --node.restart()
             else
                 gpio.write(RED_LED, 0)
             end
@@ -151,7 +151,7 @@ function server_start()
     -- Request receiver calback
     local function recv_cb(conn, data)
         -- parse http data
-        print("***** NEW REQUEST *****")
+        --print("***** NEW REQUEST *****")
         local r = httpparse(data)
 
         if r == nil then
@@ -159,7 +159,7 @@ function server_start()
             return conn:send(res.error("400", res.BAD_REQUEST))
         end
 
-        print("r: ", sjson.encode(r))
+        --print("r: ", sjson.encode(r))
 
         -- Collect WiFi Configuration
         -- params to initialize Wifi
@@ -187,14 +187,13 @@ function server_start()
             -- register a parent node (Hub)
             -- storing its address and port.
             elseif r.uri.path:find('/ping') then
-
                 if r.uri.args and r.uri.args.ip and r.uri.args.port and r.uri.args.ext_uuid then
                     DEV.HUB.addr = r.uri.args.ip
                     DEV.HUB.port = r.uri.args.port
                     DEV.HUB.ext_uuid = r.uri.args.ext_uuid
-                    print('HUB LOCATION: http://'..
-                                    DEV.HUB.addr..':'..DEV.HUB.port..
-                                    '\r\nEXT_UUID: '..DEV.HUB.ext_uuid)
+                    --print('HUB LOCATION: http://'..
+                    --                DEV.HUB.addr..':'..DEV.HUB.port..
+                    --                '\r\nEXT_UUID: '..DEV.HUB.ext_uuid)
                     return conn:send(res.error("200"))
                 else
                     return conn:send(res.error("400", res.BAD_REQUEST))

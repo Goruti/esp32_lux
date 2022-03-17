@@ -47,11 +47,8 @@ function upnp_start()
 
     -- Close UDP socket
     -- end  session
-    local function close_cb(conn)
-        if pcall(conn:close()) then
-            net.multicastLeave('', MC_ADDR)
-        end
-
+    local function close_cb(conn, port, ip, payload)
+        net.multicastLeave('', MC_ADDR)
     end
 
     -- Init socket
