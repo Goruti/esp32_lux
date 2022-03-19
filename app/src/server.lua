@@ -107,9 +107,10 @@ end
 --------------------
 -- Push Remote State
 function push_state(body)
+
     if not DEV.HUB.addr or not DEV.HUB.port or not DEV.HUB.ext_uuid then
         --print('NO HUB REGISTERED')
-        return nil
+        return false, PUSH_ERROR_NO_HUB_REGISTERED
     end
 
     -- Prepare URL
@@ -124,11 +125,15 @@ function push_state(body)
     http.post(url, { headers = headers }, sjson.encode(body),
         function(code, data)
             if (code < 0) then
-                print("Failed to Notify Smartthings")
+                --print("Failed to Notify Smartthings")
                 gpio.write(RED_LED, 1)
                 --node.restart()
+                return false, "Post failed, Code: "..code
             else
-                gpio.write(RED_LED, 0)
+                if gpio.read(RED_LED) then
+                    gpio.write(RED_LED, 0)
+                end
+                return true, nil
             end
         end
     )

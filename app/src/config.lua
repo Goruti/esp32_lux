@@ -15,6 +15,7 @@ WIFI_AP_CONFIG = {
     pwd='paravosp@p@',
     max=1
 }
+WIFI_DIS_COUNT=nil
 
 --------------
 -- Device info
@@ -43,3 +44,7 @@ TSL_INT_PIN=27
 TSL_SCL_PIN=18
 TSL_SDA_PIN=19
 TSL_LOOP_TIME_MS=60000
+
+--------------
+-- Error Notify Smartthings
+PUSH_ERROR_NO_HUB_REGISTERED = "NO_HUB_REGISTERED"
