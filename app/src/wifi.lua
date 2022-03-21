@@ -56,12 +56,11 @@ wifi.sta.on(
                     'ssid: '..info.ssid..'\r\n'..
                     'bssid: '..info.bssid..'\r\n')
             WIFI_DIS_COUNT = WIFI_DIS_COUNT + 1
-            if WIFI_DIS_COUNT >= 5 then
+            if WIFI_DIS_COUNT >= 50 then
                 print("Disable Station Configuration")
                 --wifi.sta.config({ssid="", pwd="", auto=false}, true)
-                wifi.mode(wifi.SOFTAP, true)
+                wifi.mode(wifi.STATIONAP, true)
                 wifi.ap.config(WIFI_AP_CONFIG)
-                WIFI_DIS_COUNT = 0
             end
             --Turn Off WIFI LED
             gpio.write(BLUE_LED, 0)
@@ -86,7 +85,7 @@ wifi.sta.on(
             end
             --Turn ON WIFI LED
             gpio.write(BLUE_LED, 1)
-            -- initialize Disconect counter
+            -- initialize Disconnected counter
             WIFI_DIS_COUNT = 0
             -- initialize ssdp session
             upnp_start()

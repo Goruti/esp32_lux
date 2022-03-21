@@ -71,21 +71,13 @@ end
 function lux_reading_start()
     lux_init()
     local previous_lux = -1
-    local loop_timer = tmr.create()
-    loop_timer:alarm(TSL_LOOP_TIME_MS, tmr.ALARM_AUTO, function()
-        DEV.cache.lux = round(get_lux(), 2)
 
-        print("Lux: "..DEV.cache.lux)
+    tmr.create():alarm(TSL_LOOP_TIME_MS, tmr.ALARM_AUTO, function()
+        DEV.cache.lux = round(get_lux(), 2)
+        --print("Lux: "..DEV.cache.lux)
 
         if DEV.cache.lux ~= previous_lux then
-            local success, error = notify_st({ lux = DEV.cache.lux })
-
-            if success then
-                previous_lux = DEV.cache.lux
-            elseif error ~= PUSH_ERROR_NO_HUB_REGISTERED then
-                print("Stopping lux reading loop")
-                loop_timer:unregister()
-            end
+            notify_st({ lux = DEV.cache.lux })
         end
         --if lux <= 80 then
         --    if abs(lux - previous_lux) > 15 then
@@ -128,5 +120,5 @@ function lux_reading_start()
 end
 
 function notify_st(lux_body)
-    return push_state(lux_body)
+    push_state(lux_body)
 end

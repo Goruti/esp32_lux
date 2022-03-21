@@ -107,10 +107,9 @@ end
 --------------------
 -- Push Remote State
 function push_state(body)
-
     if not DEV.HUB.addr or not DEV.HUB.port or not DEV.HUB.ext_uuid then
         --print('NO HUB REGISTERED')
-        return false, PUSH_ERROR_NO_HUB_REGISTERED
+        return nil
     end
 
     -- Prepare URL
@@ -120,7 +119,6 @@ function push_state(body)
     local headers = {
         ["Content-Type"] = "application/json"
     }
-
     --print('PUSH STATE\r\nURL: '..url..'\r\nDATA: '..sjson.encode(body))
     http.post(url, { headers = headers }, sjson.encode(body),
         function(code, data)
@@ -128,26 +126,11 @@ function push_state(body)
                 --print("Failed to Notify Smartthings")
                 gpio.write(RED_LED, 1)
                 --node.restart()
-                return false, "Post failed, Code: "..code
             else
-                if gpio.read(RED_LED) then
-                    gpio.write(RED_LED, 0)
-                end
-                return true, nil
+                if gpio.read(RED_LED) then gpio.write(RED_LED, 0) end
             end
         end
     )
-
-
-    --http.post(string.format('https://groker.init.st/api/events?accessKey=ist_73z7zXBcI7aydN3HwA0HU_JLYddDXZh4&bucketKey=QGR99BBNVJLE&lux=%s', body.lux),
-    --        nil,
-    --        "",
-    --        function(code, data)
-    --            if (code < 0) then
-    --                print("HTTP request failed to send values to initial state")
-    --            end
-    --        end
-    --)
 end
 
 -----------------

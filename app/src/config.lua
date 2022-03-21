@@ -15,7 +15,7 @@ WIFI_AP_CONFIG = {
     pwd='paravosp@p@',
     max=1
 }
-WIFI_DIS_COUNT=nil
+WIFI_DIS_COUNT=0
 
 --------------
 -- Device info

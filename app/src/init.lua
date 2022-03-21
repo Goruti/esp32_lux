@@ -7,14 +7,10 @@ dofile('server.lua')
 dofile('read_lux.lua')
 
 ---------------------------
---GLOBAL VARIALBES
-WIFI_DIS_COUNT = 0
-
----------------------------
 -- Init Device Access Point
 --print('access point ready...')
 if wifi.getmode() ~= wifi.STATION then
-    wifi.mode(wifi.SOFTAP, true)
+    wifi.mode(wifi.STATIONAP, true)
     wifi.ap.config(WIFI_AP_CONFIG)
 end
 
