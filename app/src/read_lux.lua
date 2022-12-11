@@ -117,9 +117,5 @@ function lux_reading_start()
     local previous_lux = -1
     print("Starting lux_reading_start")
     proc_lux()
-    --lux_timer = tmr.create()
-    --lux_timer:register(TSL_LOOP_TIME_MS, tmr.ALARM_AUTO, function() proc_lux() end)
-    --lux_timer:start()
-
     tmr.create():alarm(TSL_LOOP_TIME_MS, tmr.ALARM_AUTO, function() proc_lux() end)
 end
