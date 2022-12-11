@@ -18,9 +18,14 @@ function hub_server.start(driver)
         local body = json.decode(req:get_body())
         log.trace("[push-state:in:body] "..json.encode(body))
         local device = driver:get_device_info(body.uuid)
+
         if body.lux then
             driver:set_lux(device, tonumber(body.lux))
         end
+        if body.f_temp then
+            driver:set_f_temp(device, tonumber(body.f_temp))
+        end
+
         res:send('HTTP/1.1 200 OK')
     end)
 

@@ -17,6 +17,7 @@ Driver(
             lifecycle_handlers = lifecycles,
             supported_capabilities = {
                 caps.illuminanceMeasurement,
+                caps.temperatureMeasurement,
                 caps.refresh
             },
             capability_handlers = {
@@ -34,6 +35,10 @@ function driver:set_lux(device, lux)
     return device:emit_event(caps.illuminanceMeasurement.illuminance(lux))
 end
 
+-- Get new  forecast temperature Measurement from the sensor
+function driver:set_f_temp(device, f_temp)
+    return device:emit_event(caps.temperatureMeasurement.temperature(f_temp))
+end
 -----------------------------
 -- Initialize Hub server
 -- that will open port to

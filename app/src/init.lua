@@ -1,10 +1,12 @@
---  ESP32 FW ADDED MODULES: file,http,i2c,net,node,sjson,tmr,wifi
+--  ESP32 FW ADDED MODULES: file,gpio,http,i2c,net,node,sjson,time,tmr,uart,wifi
 
 -- Load config & modules
 dofile('config.lua')
 dofile('wifi.lua')
 dofile('server.lua')
 dofile('read_lux.lua')
+dofile('tools.lua')
+dofile('get_weather.lua')
 
 ---------------------------
 -- Init Device Access Point
@@ -21,5 +23,7 @@ wifi.start()
 gpio.config({gpio={RED_LED, BLUE_LED}, dir=gpio.OUT})
 -- init server
 server_start()
--- init reading_lux
-lux_reading_start()
+-- init reading_lux --> this is started from wifi.wifi.sta.on("got_ip",...
+--lux_reading_start()
+-- init get_weather --> this is started from wifi.wifi.sta.on("got_ip",...
+--get_weather_start()

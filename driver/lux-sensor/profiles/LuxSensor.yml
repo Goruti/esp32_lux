@@ -4,6 +4,8 @@ components:
     capabilities:
       - id: illuminanceMeasurement
         version: 1
+      - id: temperatureMeasurement
+        version: 1
       - id: refresh
         version: 1
     categories:

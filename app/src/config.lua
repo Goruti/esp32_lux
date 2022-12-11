@@ -27,7 +27,7 @@ DEV = {
     TYPE='LAN',
     ext_uuid=nil,
     HUB={ addr=nil, port=nil },
-    cache={ lux=nil },
+    cache={ lux=nil, f_temp=nil },
     IP_ADDR=nil
 }
 
@@ -46,5 +46,9 @@ TSL_SDA_PIN=19
 TSL_LOOP_TIME_MS=60000
 
 --------------
+-- Weather Station
+WS_LOOP_TIME_MS=6870947
+WS_URL='https://api.open-meteo.com/v1/forecast?latitude=45.4462894&longitude=-73.4860939&daily=temperature_2m_max,temperature_2m_min&timezone=auto'
+--------------
 -- Error Notify Smartthings
-PUSH_ERROR_NO_HUB_REGISTERED = "NO_HUB_REGISTERED"
+PUSH_ERROR_NO_HUB_REGISTERED="NO_HUB_REGISTERED"

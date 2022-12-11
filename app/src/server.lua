@@ -111,7 +111,6 @@ function push_state(body)
         --print('NO HUB REGISTERED')
         return nil
     end
-
     -- Prepare URL
     local url = string.format('http://%s:%s/push-state', DEV.HUB.addr, DEV.HUB.port)
     -- JSONstringify table
@@ -124,10 +123,10 @@ function push_state(body)
         function(code, data)
             if (code < 0) then
                 --print("Failed to Notify Smartthings")
-                gpio.write(RED_LED, 1)
+                gpio.write(BLUE_LED, 1)
                 --node.restart()
             else
-                if gpio.read(RED_LED) then gpio.write(RED_LED, 0) end
+                if gpio.read(BLUE_LED) then gpio.write(BLUE_LED, 0) end
             end
         end
     )

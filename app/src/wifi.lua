@@ -63,7 +63,7 @@ wifi.sta.on(
                 wifi.ap.config(WIFI_AP_CONFIG)
             end
             --Turn Off WIFI LED
-            gpio.write(BLUE_LED, 0)
+            gpio.write(RED_LED, 0)
         end)
 
 -- STATION IP Ready
@@ -84,11 +84,15 @@ wifi.sta.on(
                 wifi.mode(wifi.STATION, true)
             end
             --Turn ON WIFI LED
-            gpio.write(BLUE_LED, 1)
+            gpio.write(RED_LED, 1)
             -- initialize Disconnected counter
             WIFI_DIS_COUNT = 0
             -- initialize ssdp session
             upnp_start()
+            -- init reading_lux
+            lux_reading_start()
+            -- init get_weather
+            get_weather_start()
         end)
 
 -- ACCESS POINT Start

@@ -63,62 +63,59 @@ function get_lux()
     return calc_lux(gain, itime, ch0, ch1)
 end
 
-function round(num, len)
-    local mult = 10^(len or 0)
-    return math.floor(num * mult + 0.5) / mult
+function proc_lux()
+    DEV.cache.lux = math_round(get_lux(), 2)
+    --print("Lux: "..DEV.cache.lux)
+
+    if DEV.cache.lux ~= previous_lux then
+        notify_st({ lux = DEV.cache.lux })
+    end
+    --if lux <= 80 then
+    --    if abs(lux - previous_lux) > 15 then
+    --        notify_st({ lux = lux })
+    --        previous_lux = lux
+    --    elseif lux == 0 and lux ~= previous_lux then
+    --        notify_st({ lux = lux })
+    --        previous_lux = lux
+    --    end
+    --elseif 80 < lux <= 700 then
+    --    if abs(lux - previous_lux) > 10 then
+    --        notify_st({ lux = lux })
+    --        previous_lux = lux
+    --    end
+    --elseif 700 < lux <= 1000 then
+    --    -- report if variance is more than 5%
+    --    previous_lux = previous_lux or 0.01
+    --    if 100*abs((lux - previous_lux)/previous_lux) > 5 then
+    --        notify_st({ lux = lux })
+    --        previous_lux = lux
+    --    end
+    --elseif 1000 < lux <= 1500 then
+    --    -- report if variance is more than 20%
+    --    previous_lux = previous_lux or 0.01
+    --    if 100*abs((lux - previous_lux)/previous_lux) > 20 then
+    --        notify_st({ lux = lux })
+    --        previous_lux = lux
+    --    end
+    --elseif 1500 < lux then
+    --    -- report if variance is more than 25%
+    --    previous_lux = previous_lux or 0.01
+    --    if 100*abs((lux - previous_lux)/previous_lux) > 25 then
+    --        notify_st({ lux = lux })
+    --        previous_lux = lux
+    --    end
+    --end
+    collectgarbage()
 end
 
 function lux_reading_start()
     lux_init()
     local previous_lux = -1
+    print("Starting lux_reading_start")
+    proc_lux()
+    lux_timer = tmr.create()
+    lux_timer:register(TSL_LOOP_TIME_MS, tmr.ALARM_AUTO, function() proc_lux() end)
+    lux_timer:start()
 
-    tmr.create():alarm(TSL_LOOP_TIME_MS, tmr.ALARM_AUTO, function()
-        DEV.cache.lux = round(get_lux(), 2)
-        --print("Lux: "..DEV.cache.lux)
-
-        if DEV.cache.lux ~= previous_lux then
-            notify_st({ lux = DEV.cache.lux })
-        end
-        --if lux <= 80 then
-        --    if abs(lux - previous_lux) > 15 then
-        --        notify_st({ lux = lux })
-        --        previous_lux = lux
-        --    elseif lux == 0 and lux ~= previous_lux then
-        --        notify_st({ lux = lux })
-        --        previous_lux = lux
-        --    end
-        --elseif 80 < lux <= 700 then
-        --    if abs(lux - previous_lux) > 10 then
-        --        notify_st({ lux = lux })
-        --        previous_lux = lux
-        --    end
-        --elseif 700 < lux <= 1000 then
-        --    -- report if variance is more than 5%
-        --    previous_lux = previous_lux or 0.01
-        --    if 100*abs((lux - previous_lux)/previous_lux) > 5 then
-        --        notify_st({ lux = lux })
-        --        previous_lux = lux
-        --    end
-        --elseif 1000 < lux <= 1500 then
-        --    -- report if variance is more than 20%
-        --    previous_lux = previous_lux or 0.01
-        --    if 100*abs((lux - previous_lux)/previous_lux) > 20 then
-        --        notify_st({ lux = lux })
-        --        previous_lux = lux
-        --    end
-        --elseif 1500 < lux then
-        --    -- report if variance is more than 25%
-        --    previous_lux = previous_lux or 0.01
-        --    if 100*abs((lux - previous_lux)/previous_lux) > 25 then
-        --        notify_st({ lux = lux })
-        --        previous_lux = lux
-        --    end
-        --end
-
-        collectgarbage()
-    end)
-end
-
-function notify_st(lux_body)
-    push_state(lux_body)
+    --tmr.create():alarm(TSL_LOOP_TIME_MS, tmr.ALARM_AUTO, function() proc_lux() end)
 end

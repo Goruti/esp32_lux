@@ -2,7 +2,8 @@ local caps = require('st.capabilities')
 local neturl = require('net.url')
 local log = require('log')
 local json = require('dkjson')
-local http = require('socket.http')
+local cosock = require "cosock"
+local http = cosock.asyncify "socket.http"
 local ltn12 = require('ltn12')
 
 local command_handler = {}
@@ -46,10 +47,16 @@ function command_handler.refresh(_, device)
         -- Define online status
         device:online()
 
-        -- Refresh illuminance Level
-        if raw_data and raw_data.lux then
-            log.trace('Refreshing illuminance Level: '..json.encode(raw_data))
-            device:emit_event(caps.illuminanceMeasurement.illuminance(tonumber(raw_data.lux)))
+        -- Refresh data
+        if raw_data then
+            if raw_data.lux then
+                log.trace('Refreshing illuminance Level: '..json.encode(raw_data.lux))
+                device:emit_event(caps.illuminanceMeasurement.illuminance(tonumber(raw_data.lux)))
+            end
+            if raw_data.f_temp then
+                log.trace('Refreshing forecast temperature: '..json.encode(raw_data.f_temp))
+                device:emit_event(caps.temperatureMeasurement.temperature(tonumber(raw_data.f_temp)))
+            end
         end
 
     else
