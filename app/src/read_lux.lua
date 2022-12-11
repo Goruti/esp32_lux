@@ -26,7 +26,11 @@ function calc_lux(gain, itime, ch0, ch1)
     lux2 = ((LUX_COEFC * ch0) - (LUX_COEFD * ch1)) / cpl
 
     collectgarbage()
-    return math.max(lux1, lux2)
+    if lux1 < 0 and lux2 < 0 then
+        return 0
+    else
+        return math.max(lux1, lux2)
+    end
 end
 
 function get_lux()
@@ -113,9 +117,9 @@ function lux_reading_start()
     local previous_lux = -1
     print("Starting lux_reading_start")
     proc_lux()
-    lux_timer = tmr.create()
-    lux_timer:register(TSL_LOOP_TIME_MS, tmr.ALARM_AUTO, function() proc_lux() end)
-    lux_timer:start()
+    --lux_timer = tmr.create()
+    --lux_timer:register(TSL_LOOP_TIME_MS, tmr.ALARM_AUTO, function() proc_lux() end)
+    --lux_timer:start()
 
-    --tmr.create():alarm(TSL_LOOP_TIME_MS, tmr.ALARM_AUTO, function() proc_lux() end)
+    tmr.create():alarm(TSL_LOOP_TIME_MS, tmr.ALARM_AUTO, function() proc_lux() end)
 end

@@ -21,9 +21,9 @@ end
 function get_weather_start()
     print("Starting get_weather_start")
     get_weather()
-    weather_timer = tmr.create()
-    weather_timer:register(WS_LOOP_TIME_MS, tmr.ALARM_AUTO, function() get_weather() end)
-    weather_timer:start()
+    --weather_timer = tmr.create()
+    --weather_timer:register(WS_LOOP_TIME_MS, tmr.ALARM_AUTO, function() get_weather() end)
+    --weather_timer:start()
 
-    --tmr.create():alarm(WS_LOOP_TIME_MS, tmr.ALARM_AUTO, function() get_weather() end)
+    tmr.create():alarm(WS_LOOP_TIME_MS, tmr.ALARM_AUTO, function() get_weather() end)
 end
