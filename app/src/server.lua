@@ -146,7 +146,7 @@ function server_start()
             return conn:send(res.error("400", res.BAD_REQUEST))
         end
 
-        --print("r: ", sjson.encode(r))
+        print("request: ", sjson.encode(r))
 
         -- Collect WiFi Configuration
         -- params to initialize Wifi

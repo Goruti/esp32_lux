@@ -75,6 +75,7 @@ function command_handler.send_lan_command(method, url, path, body)
     local query = neturl.buildQuery(body or {})
     if query then dest_url = dest_url..'?'..query end
 
+    log.trace("Req Method: "..method.."; Req Url: "..dest_url)
     client, code, headers, status = http.request({
         method = method,
         url = dest_url,
@@ -83,10 +84,9 @@ function command_handler.send_lan_command(method, url, path, body)
             ['Content-Type'] = 'application/x-www-urlencoded'
         }})
 
-
     -- Handle response
     r['code'], r['headers'], r['status'], r['response'] = code, headers, status, res_body
-    log.trace("r: "..json.encode(r))
+    log.trace("resp: "..json.encode(r))
 
     if code == 200 then
         return true, res_body
