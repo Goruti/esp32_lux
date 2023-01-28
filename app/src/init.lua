@@ -8,6 +8,11 @@ dofile('read_lux.lua')
 dofile('tools.lua')
 dofile('get_weather.lua')
 
+--  Run the garbage collector if the allocation fails.
+--  If the allocation fails even after running the garbage collector, the allocator will
+--  return with error
+node.egc.setmode(node.egc.ON_ALLOC_FAILURE)
+
 ---------------------------
 -- Init Device Access Point
 --print('access point ready...')

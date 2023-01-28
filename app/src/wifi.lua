@@ -70,6 +70,8 @@ wifi.sta.on(
 wifi.sta.on(
         "got_ip",
         function(evt, info)
+            --Turn ON WIFI LED
+            gpio.write(RED_LED, 1)
             print("Disable AP")
             wifi.mode(wifi.STATION, true)
             DEV.IP_ADDR=info.ip
@@ -83,16 +85,21 @@ wifi.sta.on(
             if wifi.getmode() ~= wifi.STATION then
                 wifi.mode(wifi.STATION, true)
             end
-            --Turn ON WIFI LED
-            gpio.write(RED_LED, 1)
             -- initialize Disconnected counter
             WIFI_DIS_COUNT = 0
-            -- initialize ssdp session
-            upnp_start()
-            -- init reading_lux
-            lux_reading_start()
+
             -- init get_weather
             get_weather_start()
+
+            -- initialize ssdp session
+            upnp_start()
+
+            --Turn Off WIFI LED
+            gpio.write(RED_LED, 0)
+
+            -- init reading_lux
+            lux_reading_start()
+
         end)
 
 -- ACCESS POINT Start

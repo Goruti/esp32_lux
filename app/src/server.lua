@@ -109,6 +109,7 @@ end
 function push_state(body)
     if not DEV.HUB.addr or not DEV.HUB.port or not DEV.HUB.ext_uuid then
         --print('NO HUB REGISTERED')
+        collectgarbage()
         return nil
     end
     -- Prepare URL
@@ -128,6 +129,7 @@ function push_state(body)
             else
                 if gpio.read(BLUE_LED) then gpio.write(BLUE_LED, 0) end
             end
+            collectgarbage()
         end
     )
 end
@@ -146,8 +148,7 @@ function server_start()
             return conn:send(res.error("400", res.BAD_REQUEST))
         end
 
-        print("request: ", sjson.encode(r))
-
+        print("incoming-req: ", sjson.encode(r))
         -- Collect WiFi Configuration
         -- params to initialize Wifi
         -- Station service.
