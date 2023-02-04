@@ -13,6 +13,10 @@ dofile('get_weather.lua')
 --  return with error
 node.egc.setmode(node.egc.ON_ALLOC_FAILURE)
 
+--Turn On LEDs
+gpio.write(RED_LED, 1)
+gpio.write(BLUE_LED, 1)
+--Init CHECK_WEATHER counter
 ---------------------------
 -- Init Device Access Point
 --print('access point ready...')
