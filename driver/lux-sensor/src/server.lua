@@ -1,16 +1,29 @@
 local lux = require('luxure')
-local cosock = require('cosock').socket
-local json = require('dkjson')
+local cosock = require('cosock')
+local json = require('st.json')
 local log = require('log')
 
 local hub_server = {}
 
 function hub_server.start(driver)
-    local server = lux.Server.new_with(cosock.tcp(), {env='debug'})
+    --[UPDATES] https://community.smartthings.com/t/debug-creating-drivers-for-lan-devices-with-smartthings-edge/243769/15
+    --(OLD VERSION....) local server = lux.Server.new_with(cosock.tcp(), {env='debug'})
+    local server = lux.Server.new_with(cosock.socket.tcp(), {env='debug'})
 
     -- Register server
-    driver:register_channel_handler(server.sock, function ()
-        server:tick()
+    -- (OLD VERSION....) driver:register_channel_handler(server.sock, function ()
+    -- (OLD VERSION....)     server:tick()
+    -- (OLD VERSION....) end)
+
+    cosock.spawn(function()
+        --nayelyz Version
+        --local client = serversock:accept()
+        --watch_socket(client)
+
+        -- Rlgarner54 Version
+        while true do 
+            server:tick()
+        end
     end)
 
     -- Endpoint

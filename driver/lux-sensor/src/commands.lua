@@ -1,7 +1,7 @@
 local caps = require('st.capabilities')
 local neturl = require('net.url')
 local log = require('log')
-local json = require('dkjson')
+local json = require('st.json')
 local cosock = require "cosock"
 local http = cosock.asyncify "socket.http"
 local ltn12 = require('ltn12')
