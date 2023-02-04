@@ -29,8 +29,6 @@ function upnp_start()
         local headers = req.headers
 
         --print('INCOMING TRAFFIC:\r\n'..payload..'\r\n')
-        --print('INCOMING TRAFFIC:\r\n'..sjson.encode(req)..'\r\n')
-
         if req and req.status:find('M-SEARCH') then
             --print('INCOMING TRAFFIC:\r\n'..sjson.encode(req)..'\r\n')
             if headers.st:find(DEV.MN) and headers.st:find(DEV.NAME) then
@@ -38,7 +36,7 @@ function upnp_start()
                 print('SSDP RESPONSE:\r\n'..SSDP_RES..'\r\n')
                 --Send SSDP repsonse
                 conn:send(port, ip, SSDP_RES)
-                SSDP_RES = nil
+                --SSDP_RES = nil
                 req = nil
                 collectgarbage()
             end
@@ -47,9 +45,10 @@ function upnp_start()
 
     -- Close UDP socket
     -- end  session
-    local function close_cb(conn, port, ip, payload)
+    local function close_cb(conn)
         net.multicastLeave('', MC_ADDR)
-    end
+        conn:close()
+      end
 
     -- Init socket
     local upnp = net.createUDPSocket()

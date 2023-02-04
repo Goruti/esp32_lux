@@ -62,18 +62,16 @@ wifi.sta.on(
                 wifi.mode(wifi.STATIONAP, true)
                 wifi.ap.config(WIFI_AP_CONFIG)
             end
-            --Turn Off WIFI LED
-            gpio.write(RED_LED, 0)
         end)
 
 -- STATION IP Ready
 wifi.sta.on(
         "got_ip",
         function(evt, info)
-            --Turn ON WIFI LED
-            gpio.write(RED_LED, 1)
             print("Disable AP")
+
             wifi.mode(wifi.STATION, true)
+
             DEV.IP_ADDR=info.ip
             print(
                     'service: station\r\n'..
@@ -86,17 +84,17 @@ wifi.sta.on(
                 wifi.mode(wifi.STATION, true)
             end
             -- initialize Disconnected counter
-            WIFI_DIS_COUNT = 0
-
-            -- init get_weather
-            get_weather_start()
+            --WIFI_DIS_COUNT = 0
+            --Turn Off Blue LED
+            gpio.write(BLUE_LED, 0)
+            --Turn Off Red LED
+            gpio.write(RED_LED, 0)
 
             -- initialize ssdp session
             upnp_start()
 
-            --Turn Off WIFI LED
-            gpio.write(RED_LED, 0)
-
+            -- init get_weather
+            get_weather_start()
             -- init reading_lux
             lux_reading_start()
 
@@ -109,6 +107,8 @@ wifi.ap.on(
             print(
                     'service: access point\r\n'..
                     'action: started')
+            --Turn On Red LED
+            gpio.write(RED_LED, 1)
         end)
 
 -- ACCESS POINT Stop
@@ -118,6 +118,8 @@ wifi.ap.on(
             print(
                     'service: access point\r\n'..
                     'action: stopped')
+            --Turn Off Red LED
+            gpio.write(RED_LED, 0)
         end)
 
 -- ACCESS POINT New Client

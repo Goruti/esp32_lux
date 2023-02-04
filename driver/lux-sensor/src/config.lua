@@ -11,7 +11,7 @@ config.MC_PORT=1900
 config.MC_TIMEOUT=2
 config.MSEARCH=table.concat({
     'M-SEARCH * HTTP/1.1',
-    'HOST: 239.255.255.250:1900',
+    'HOST: '..config.MC_ADDRESS..':'..config.MC_PORT,
     'MAN: "ssdp:discover"',
     'MX: 4',
     'ST: urn:DiegoAntonino:device:LuxSensorESP32:1'

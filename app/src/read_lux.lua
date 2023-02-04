@@ -68,12 +68,13 @@ function get_lux()
 end
 
 function proc_lux()
-    DEV.cache.lux = math_round(get_lux(), 2)
+    local current_lux = math_round(get_lux(), 2)
     --print("Lux: "..DEV.cache.lux)
-
-    if DEV.cache.lux ~= previous_lux then
+    if current_lux ~= DEV.cache.lux then
+        DEV.cache.lux = current_lux
         notify_st({ lux = DEV.cache.lux })
     end
+
     --if lux <= 80 then
     --    if abs(lux - previous_lux) > 15 then
     --        notify_st({ lux = lux })
@@ -114,7 +115,6 @@ end
 
 function lux_reading_start()
     lux_init()
-    local previous_lux = -1
     print("Starting lux_reading_start")
     proc_lux()
     tmr.create():alarm(TSL_LOOP_TIME_MS, tmr.ALARM_AUTO, function() proc_lux() end)

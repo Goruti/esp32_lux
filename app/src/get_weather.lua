@@ -1,37 +1,25 @@
 function get_weather()
-    headers = {
-        ["Accept"] = "application/json"
+    local headers = {
+        ["Accept"] = "application/json",
+        ["Connection"] = "close"
     }
-
-    --http.get(WS_URL, { headers = headers },
-    --        function(code, data)
-    --            if (code < 0) then
-    --                print("Failed to get weather data")
-    --                gpio.write(BLUE_LED, 1)
-    --                --node.restart()
-    --                collectgarbage()
-    --            else
-    --                if gpio.read(BLUE_LED) then gpio.write(BLUE_LED, 0) end
-    --                local weather = sjson.decode(data)
-    --                DEV.cache.f_temp = math_round(math_average({math_average(weather.daily.temperature_2m_min),math_average(weather.daily.temperature_2m_max)}),2)
-    --                --print("f_temp: ", DEV.cache.f_temp)
-    --                notify_st({ f_temp = DEV.cache.f_temp } )
-    --            end
-    --        end)
-
-    code, data = http.get(WS_URL, { headers = headers })
-    if (code < 0) then
-        print("Failed to get weather data")
-        gpio.write(BLUE_LED, 1)
-        --node.restart()
-        collectgarbage()
-    else
-        if gpio.read(BLUE_LED) then gpio.write(BLUE_LED, 0) end
-        local weather = sjson.decode(data)
-        DEV.cache.f_temp = math_round(math_average({math_average(weather.daily.temperature_2m_min),math_average(weather.daily.temperature_2m_max)}),2)
-        --print("f_temp: ", DEV.cache.f_temp)
-        notify_st({ f_temp = DEV.cache.f_temp } )
-    end
+    http.get(WS_URL, { headers = headers },
+            function(code, data)
+                if (code < 0) then
+                    print("Failed to get weather data")
+                    gpio.write(BLUE_LED, 1)
+                    --node.restart()
+                    collectgarbage()
+                else
+                    if gpio.read(BLUE_LED) then gpio.write(BLUE_LED, 0) end
+                    local weather = sjson.decode(data)
+                    DEV.cache.f_temp = math_round(math_average({math_average(weather.daily.temperature_2m_min),math_average(weather.daily.temperature_2m_max)}),2)
+                    --print("f_temp: ", DEV.cache.f_temp)
+                    notify_st({ f_temp = DEV.cache.f_temp } )
+                end
+            end)
+            
+    collectgarbage()
 end
 
 function get_weather_start()
