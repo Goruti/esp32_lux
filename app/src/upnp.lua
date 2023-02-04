@@ -47,7 +47,6 @@ function upnp_start()
     -- end  session
     local function close_cb(conn)
         net.multicastLeave('', MC_ADDR)
-        conn:close()
       end
 
     -- Init socket

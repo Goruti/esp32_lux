@@ -76,7 +76,7 @@ function command_handler.send_lan_command(method, url, path, body)
     if query then dest_url = dest_url..'?'..query end
 
     log.trace("Req Method: "..method.."; Req Url: "..dest_url)
-    client, code, headers, status = http.request({
+    local client, code, headers, status = http.request({
         method = method,
         url = dest_url,
         sink = ltn12.sink.table(res_body),
