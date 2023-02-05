@@ -26,6 +26,7 @@ end
 ------------------
 -- Refresh command
 function command_handler.refresh(_, device)
+    local raw_data = nil
     local success, data = command_handler.send_lan_command(
             'GET',
             device.device_network_id,
@@ -42,7 +43,9 @@ function command_handler.refresh(_, device)
         -- Update below when fixed:
         --local raw_data = json.decode(table.concat(data))
         --local raw_data = json.decode(table.concat(data)..'}')
-        local raw_data = json.decode(table.concat(data))
+        if data then
+            raw_data = json.decode(table.concat(data))
+        end
 
         -- Define online status
         device:online()

@@ -1,0 +1,12 @@
+{
+    "Lua.diagnostics.globals": [
+        "net",
+        "wifi",
+        "gpio",
+        "i2c",
+        "http",
+        "sjson",
+        "node",
+        "tmr"
+    ]
+}
