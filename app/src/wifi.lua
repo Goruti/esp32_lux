@@ -37,12 +37,14 @@ wifi.sta.on(
 wifi.sta.on(
         "connected",
         function(evt, info)
-            print(
+                WIFI_DIS_COUNT = 0
+                print(
                     'service: station\r\n'..
                     'status: connected\r\n'..
                     'ssid: '..info.ssid..'\r\n'..
                     'channel: '..info.channel..'\r\n'..
                     'bssid: '..info.bssid..'\r\n')
+                
         end)
 
 -- STATION Disconnected
@@ -59,7 +61,7 @@ wifi.sta.on(
             if WIFI_DIS_COUNT >= 50 then
                 print("Disable Station Configuration")
                 --wifi.sta.config({ssid="", pwd="", auto=false}, true)
-                wifi.mode(wifi.STATIONAP, true)
+                wifi.mode(wifi.SOFTAP, true)
                 wifi.ap.config(WIFI_AP_CONFIG)
             end
         end)
