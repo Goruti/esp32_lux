@@ -61,7 +61,12 @@ wifi.sta.on(
             if WIFI_DIS_COUNT >= 50 then
                 print("Disable Station Configuration")
                 --wifi.sta.config({ssid="", pwd="", auto=false}, true)
-                wifi.mode(wifi.SOFTAP, true)
+                --local wifi_config = wifi.sta.getconfig()
+                --wifi_config.auto = false
+                --wifi.sta.config(wifi_config, true)
+                wifi.sta.disconnect()
+
+                wifi.mode(wifi.STATIONAP, true)
                 wifi.ap.config(WIFI_AP_CONFIG)
             end
         end)
