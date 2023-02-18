@@ -27,6 +27,7 @@ function notify_st(body)
                     --print("Failed to Notify Smartthings")
                     gpio.write(BLUE_LED, 1)
                     --node.restart()
+                    upnp_start()
                 else
                     if gpio.read(BLUE_LED) then gpio.write(BLUE_LED, 0) end
                 end

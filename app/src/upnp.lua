@@ -31,7 +31,7 @@ function upnp_start()
         --print('INCOMING TRAFFIC:\r\n'..payload..'\r\n')
         if req and req.status:find('M-SEARCH') then
             --print('INCOMING TRAFFIC:\r\n'..sjson.encode(req)..'\r\n')
-            if headers.st:find(DEV.MN) and headers.st:find(DEV.NAME) then
+            if headers and headers.st and headers.st:find(DEV.MN) and headers.st:find(DEV.NAME) then
                 --print('DISCOVERY STREAM:\r\n'..payload..'\r\n')
                 print('SSDP RESPONSE:\r\n'..SSDP_RES..'\r\n')
                 --Send SSDP repsonse
