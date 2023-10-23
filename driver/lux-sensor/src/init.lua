@@ -37,7 +37,7 @@ end
 
 -- Get new  forecast temperature Measurement from the sensor
 function driver:set_f_temp(device, f_temp)
-    return device:emit_event(caps.temperatureMeasurement.temperature(f_temp))
+    return device:emit_event(caps.temperatureMeasurement.temperature({value=f_temp,unit="C"}))
 end
 -----------------------------
 -- Initialize Hub server
